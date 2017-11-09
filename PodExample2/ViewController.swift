@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        Alamofire.request("https://api.imgflip.com/get_memes").responseJSON { (response) in
+            if let value = response.result.value {
+                print(value)
+                // or using SwiftyJSON
+                let json = JSON(value)
+                print(json)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
